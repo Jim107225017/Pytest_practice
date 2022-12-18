@@ -115,14 +115,14 @@ def test_get_books():
     assert response_h.json()['books'][0]['author'] == 'Havard'
     
 
-# %%
-def test_get_books_fail_sample():
-    global URL
+# # %%
+# def test_get_books_fail_sample():
+#     global URL
     
-    url_e = f'{URL}/api/book'
-    response_e = requests.request('GET', url_e)
+#     url_e = f'{URL}/api/book'
+#     response_e = requests.request('GET', url_e)
     
-    assert response_e.status_code == 403   # page not found
+#     assert response_e.status_code == 403   # page not found
     
 
 # %%
