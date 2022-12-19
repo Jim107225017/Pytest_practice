@@ -1,5 +1,5 @@
 # Pytest_practice
-Bookstore CRUD API with **flask**/**fastapi** and use pytest for testing.
+Bookstore CRUD API with **flask**/**fastapi** and use **pytest** for testing.
 
 ## Why Unitest?
 * [Unitest 實踐](https://yu-jack.github.io/2020/09/14/unit-test-best-practice-part-1/)
