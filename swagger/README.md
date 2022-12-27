@@ -28,8 +28,8 @@
 				* number
 				* integer
 				* boolean
-				* array
-				* object
+				* array (list)
+				* object (dictionary)
 		* **description** : parameter description
 			* type : string
 		* **required** : requirement
@@ -39,9 +39,81 @@
 
 * **definitions** : For **reuse schema**
 	* key : schema name
-	* value : data structure
+	* value : data **type**
 
 * **responses**
+    * key : status code
+    * value : **description** and/or **schema**
+
+## sample code
+* Object type
+    * part : 
+        * **type** (object)
+        * **properties**
+        * **required**
+    * example : 
+        ```yml=
+        book_body:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int64
+                title:
+                    type: string
+                description:
+                    type: string
+                author:
+                    type: string
+                borrowed:
+                    type: boolean
+            required:
+                - id
+                - title
+                - description
+                - author
+                - borrowed
+        ```
+    
+    * demo : 
+
+        > ![sample_0.png](https://i.imgur.com/Ic02fkE.png)
+
+* Array type
+    * part : 
+        * **type** (array)
+        * **items**
+    * example : 
+        ```yml=
+        books_body:
+            type: array
+            items:
+                $ref: "#/definitions/book_body"
+        ```
+    
+    * demo : 
+    
+        > ![sample_1.png](https://i.imgur.com/j9tUYbm.png)
+
+* response
+    * part : 
+        * **description**
+        * **schema**
+    * example : 
+        ```yml=
+        200:
+            description: A list of books
+            schema:
+                type: object
+                properties:
+                    books:
+                        $ref: "#/definitions/books_body"
+        ```
+    
+    * demo : 
+        
+        > ![sample_2.png](https://i.imgur.com/RtbkhoJ.png)
+
 
 ## Reference
 * [Swagger-OAS2](https://swagger.io/docs/specification/2-0/describing-responses/)
