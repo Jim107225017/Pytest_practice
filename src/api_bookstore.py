@@ -8,15 +8,61 @@ Created on Mon Dec  5 13:56:39 2022
 # %%
 # Includes Packages
 from flask import Flask, jsonify, request
+from flasgger import Swagger, swag_from
+import os
 
 
 # %%
 # Include Modules
-from src.utility import conditions_search
+# from src.utility import conditions_search
+from utility import conditions_search
 
 
 # %%
 app = Flask(__name__)
+
+swagger_config = {"headers": [], 
+                  "specs": [{"endpoint": 'apispec_2', 
+                             "route": '/api/documents.json',
+                             "rule_filter": lambda rule: True,  # all in
+                             "model_filter": lambda tag: True,  # all in
+                             }],
+                  "static_url_path": "/api/flasgger_static",
+                  "swagger_ui": True,
+                  "specs_route": "/api/apidocs"
+                  }
+
+template_config = {"info": {"title": "Bookstore API", 
+                            "description": "This is a demo API",
+                            "termsOfService": "https://wise-paas.advantech.com/en-us/marketplace/product/advantech.aifs-phm",
+                            "version": "0.0.0.0", 
+                            "swagger_version": "2.0", 
+                            "contact": {"responsibleOrganization": "ADVANTECH-iMachine",
+                                        "responsibleDeveloper": "ChiChun",
+                                        "email": "chichun.chen@advantech.com.tw",
+                                        "url": "https://wise-paas.advantech.com/en-us/marketplace/product/advantech.aifs-phm"}}, 
+                   "tags": [{"name": "books", 
+                             "description": "Books CRUD", 
+                             "externalDocs": {"description": "Find out more", 
+                                              "url": "http://swagger.io"}}, 
+                            {"name": "books2", 
+                                      "description": "Books CRUD", 
+                                      "externalDocs": {"description": "Find out more", 
+                                                       "url": "http://swagger.io"}},]
+                   }
+
+Swagger(app, template=template_config, config=swagger_config)
+
+
+# %%
+try:
+    cwd = os.path.abspath(__file__)   # Cannot run this command in IDE
+    cwd, _ = os.path.split(cwd)
+except:
+    cwd = os.getcwd()   # current work space (exe or main.py)
+
+root = os.sep.join(cwd.split(os.sep)[:-1])   # root dir
+swagger_dir = os.sep.join([root, 'swagger', 'bookstore'])
 
 
 # %%
@@ -42,6 +88,7 @@ books = [
 # %%
 # C(create)
 @app.route("/api/books", methods=["POST"])
+@swag_from(os.sep.join([swagger_dir, 'add_books.yml']))
 def add_books():
     """ 
     function to add books 
@@ -84,6 +131,7 @@ def add_books():
 # %%
 # R(read)
 @app.route("/api/books", methods=["GET"])
+@swag_from(os.sep.join([swagger_dir, 'get_books.yml']))
 def get_books():
     """ 
     function to get all books 
@@ -108,6 +156,7 @@ def get_books():
 # %%
 # U(update)
 @app.route("/api/books", methods=["PUT"])
+@swag_from(os.sep.join([swagger_dir, 'update_books.yml']))
 def update_books():
     """ 
     function to update books 
@@ -160,6 +209,7 @@ def update_books():
 # %%
 # D(delete)
 @app.route('/api/books/<int:book_id>', methods=['DELETE'])
+@swag_from(os.sep.join([swagger_dir, 'delete_book.yml']))
 def delete_book(book_id: int):
     """ 
     function to delete book 
