@@ -1,0 +1,40 @@
+Get book data
+---
+tags:
+    - books
+produces: 
+    - application/json
+parameters: 
+    - name: id
+      in: query
+      type: integer
+      description: "Book ID"
+      required: false
+    - name: title
+      in: query
+      type: string
+      description: "Book title"
+      required: false
+    - name: description
+      in: query
+      type: string
+      description: "Book description"
+      required: false
+    - name: author
+      in: query
+      type: string
+      description: "Book author"
+      required: false
+    - name: borrowed
+      in: query
+      type: boolean
+      description: "Book status"
+      required: false
+responses:
+    200:
+        description: A list of books
+        schema:
+            type: object
+            properties:
+                books:
+                    $ref: "#/definitions/books_body"

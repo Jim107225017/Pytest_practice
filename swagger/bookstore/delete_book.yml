@@ -1,0 +1,17 @@
+Delete book data
+---
+tags:
+    - books
+produces: 
+    - application/json
+parameters: 
+    - name: book_id
+      in: path
+      type: integer
+      description: "Book ID"
+      required: ture
+responses:
+    200:
+        description: Delete book success
+    400:
+        description: ID not exist

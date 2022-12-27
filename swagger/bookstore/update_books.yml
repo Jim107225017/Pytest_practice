@@ -1,0 +1,18 @@
+Put book data
+---
+tags:
+    - books
+produces: 
+    - application/json
+parameters: 
+    - name: "body"
+      in: "body"
+      description: "Request body"
+      required: true
+      schema:
+          $ref: "#/definitions/books_body"
+responses:
+    200:
+        description: Update books success
+    400:
+        description: Invalid header || Invalid body type || Keys missing || ID not exist

@@ -1,0 +1,43 @@
+Post book data
+---
+tags:
+    - books
+produces: 
+    - application/json
+parameters: 
+    - name: "body"
+      in: "body"
+      description: "Request body"
+      required: true
+      schema:
+          $ref: "#/definitions/books_body"
+definitions:
+    book_body:
+        type: object
+        properties:
+            id:
+                type: integer
+                format: int64
+            title:
+                type: string
+            description:
+                type: string
+            author:
+                type: string
+            borrowed:
+                type: boolean
+        required:
+            - id
+            - title
+            - description
+            - author
+            - borrowed
+    books_body:
+        type: array
+        items:
+            $ref: "#/definitions/book_body"
+responses:
+    200:
+        description: Add books success
+    400:
+        description: Invalid header || Invalid body type || keys missing || duplicate ID value
