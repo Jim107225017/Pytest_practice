@@ -22,9 +22,12 @@ Bookstore CRUD API with **flask**/**fastapi** and use **pytest** for testing.
 ## Reference : 
 * [Pytest-Beginner](https://www.minglunwu.com/notes/2022/pytest_101.html)
 * [Pytest-FlaskAPI](https://jerryeml.coderbridge.io/2021/07/11/Create-an-API-with-Flask-and-test-with-pytest/)
+* [Pytest-Github](https://github.com/pytest-dev/pytest)
 
 ## FAQ : 
 1. PATH issue with pytest **ImportError**
 > Ans : Run `pytest` itself as a module with: `python -m pytest`
 > [stack overflow](https://stackoverflow.com/questions/10253826/path-issue-with-pytest-importerror-no-module-named-yadayadayada)
 
+## Star History
+[![Star History Chart](https://api.star-history.com/svg?repos=pytest-dev/pytest&type=Timeline)](https://star-history.com/#pytest-dev/pytest&Timeline)
